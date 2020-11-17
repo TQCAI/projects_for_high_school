@@ -1,0 +1,7 @@
+.idea
+__pycache__
+output
+data/bow_docs
+data/dictionary
+data/lda_model*
+data/words.txt
