@@ -38,14 +38,17 @@ def get_stop_words() -> set:
 from gensim import corpora
 
 stopwords = get_stop_words()
-df = pd.read_csv("../data/comments.csv")
 docs = []
-for comment in df.comments:
-    processed = re.sub(f"[{punctuation}]", "", comment)
-    processed = format_str(processed)
-    words = [word for word in jieba.cut(processed) if word not in stopwords]
-    if len(words) > 3:
-        docs.append(words)
+for file in Path("../data").iterdir():
+    if not file.suffix == ".csv":
+        continue
+    df = pd.read_csv(file)
+    for comment in df.comments:
+        processed = re.sub(f"[{punctuation}]", "", comment)
+        processed = format_str(processed)
+        words = [word for word in jieba.cut(processed) if word not in stopwords]
+        if len(words) > 3:
+            docs.append(words)
 dictionary = corpora.Dictionary(docs)
 bow_docs = [dictionary.doc2bow(doc) for doc in docs]
 lda_model = LdaModel(
