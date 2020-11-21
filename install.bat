@@ -8,7 +8,7 @@ pip install requests==2.23.0  -i https://pypi.tuna.tsinghua.edu.cn/simple  --tim
 pip install zhon==1.1.5 -i https://pypi.tuna.tsinghua.edu.cn/simple  --timeout 3600
 pip install jieba==0.42.1 -i https://pypi.tuna.tsinghua.edu.cn/simple  --timeout 3600
 pip install wordcloud==1.8.1 -i https://pypi.tuna.tsinghua.edu.cn/simple  --timeout 3600
-pip install opencv-python==4.4.0 -i https://pypi.tuna.tsinghua.edu.cn/simple  --timeout 3600
+pip install opencv-python>=4.4.0 -i https://pypi.tuna.tsinghua.edu.cn/simple  --timeout 3600
 pip install gensim==3.8.3  -i https://pypi.tuna.tsinghua.edu.cn/simple  --timeout 3600
 pip install pyLDAvis  -i https://pypi.tuna.tsinghua.edu.cn/simple  --timeout 3600
 pip install freegames==2.3.2  -i https://pypi.tuna.tsinghua.edu.cn/simple  --timeout 3600
