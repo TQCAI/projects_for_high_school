@@ -14,10 +14,14 @@ s = 10
 food = vector(0, 0)
 snake = [vector(s, 0)]
 aim = vector(0, -s)
+cnt = vector(0, 0)
 
 
 def change(x, y):
     "Change snake direction."
+    if (aim.x * x < 0 or aim.y * y < 0):
+        print("无效的方向改变")
+        return
     aim.x = x
     aim.y = y
 
@@ -38,11 +42,11 @@ def move():
         return
 
     snake.append(head)
-
     if head == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * s
         food.y = randrange(-15, 15) * s
+        cnt.x += 1
     else:
         snake.pop(0)
 
@@ -53,7 +57,7 @@ def move():
 
     square(food.x, food.y, s - 1, 'green')
     update()
-    ontimer(move, 200)
+    ontimer(move, max(10, 200 - cnt.x * 25))
 
 
 setup(420, 420, 370, 0)
