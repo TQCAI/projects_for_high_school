@@ -38,16 +38,17 @@ def format_str(content):
 
 def get_stop_words() -> set:
     res = set()
-    for file in Path("../data/stopwords").iterdir():
+    for file in Path(f"{cur_path}/../data/stopwords").iterdir():
         if file.suffix == ".txt":
             res |= set(file.read_text(encoding="utf-8").splitlines())
     return res
 
 
+cur_path = Path(__file__).parent
 movie_name = "复联4"
 if len(sys.argv) > 1:
     movie_name = sys.argv[1]
-df = pd.read_csv(f"../data/comments_{movie_name}.csv")
+df = pd.read_csv(f"{cur_path}/../data/comments_{movie_name}.csv")
 txt = ""
 for comment in df.comments:
     processed = re.sub(f"[{punctuation}]", "", comment)
@@ -59,13 +60,13 @@ res = []
 for word in words:
     if len(word) > 1:
         res.append(word)
-with open("../data/words.txt", "w+", encoding="utf-8") as f:
+with open(f"{cur_path}/../data/words.txt", "w+", encoding="utf-8") as f:
     f.write("\n".join(res))
 
-with open("../data/words.txt", "r", encoding="utf-8") as f:
+with open(f"{cur_path}/../data/words.txt", "r", encoding="utf-8") as f:
     words = f.read().splitlines()
 # mask = None
-mask = np.array(Image.open(f"../data/{movie_name}.jpg"))
+mask = np.array(Image.open(f"{cur_path}/../data/{movie_name}.jpg"))
 stopwords = get_stop_words()
 wc = wordcloud.WordCloud(
     font_path="simkai.ttf",  # 指定字体类型
@@ -77,9 +78,9 @@ wc = wordcloud.WordCloud(
     stopwords=stopwords
 )
 wc = wc.generate(" ".join(words))  ## 生成词云
-Path("../output").mkdir(parents=True, exist_ok=True)
+Path(f"{cur_path}/../output").mkdir(parents=True, exist_ok=True)
 plt.figure(figsize=(8, 8), dpi=200)
 plt.imshow(wc)
 plt.axis("off")
-plt.savefig(f"../output/wordcloud_{movie_name}.png")
+plt.savefig(f"{cur_path}/../output/wordcloud_{movie_name}.png")
 plt.show()

@@ -22,6 +22,7 @@ headers = {
     "Content-Type": "text/application"
 }
 results = []
+cur_path = Path(__file__).parent
 
 if len(sys.argv) > 1:
     id2name = {}
@@ -46,5 +47,5 @@ for movie_id, movie_name in id2name.items():
                 results.append(comment)
                 print(comment)
     df = pd.DataFrame(pd.Series(results), columns=["comments"])
-    Path("../data").mkdir(parents=True, exist_ok=True)
-    df.to_csv(f"../data/comments_{movie_name}.csv", index=False)
+    Path(f"{cur_path}/../data").mkdir(parents=True, exist_ok=True)
+    df.to_csv(f"{cur_path}/../data/comments_{movie_name}.csv", index=False)
