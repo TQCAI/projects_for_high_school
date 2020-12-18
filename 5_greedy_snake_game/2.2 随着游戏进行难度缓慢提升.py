@@ -6,14 +6,18 @@ Excercises
 4. Change the snake to respond to arrow keys.
 """
 
-from turtle import *
 from random import randrange
+from turtle import *
+
 from freegames import square, vector
 
 s = 10
 food = vector(0, 0)
 snake = [vector(s, 0)]
 aim = vector(0, -s)
+delta=190
+
+
 
 
 def change(x, y):
@@ -32,6 +36,7 @@ def inside(head):
 
 def move():
     "Move snake forward one segment."
+    global delta
     head = snake[-1].copy()
     head.move(aim)
 
@@ -41,11 +46,11 @@ def move():
         return
 
     snake.append(head)
-
     if head == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * s
         food.y = randrange(-15, 15) * s
+        delta*=0.95
     else:
         snake.pop(0)
 
@@ -56,7 +61,7 @@ def move():
 
     square(food.x, food.y, s - 1, 'green')
     update()
-    ontimer(move, 200)
+    ontimer(move, int(delta+10))
 
 
 setup(420, 420, 370, 0)

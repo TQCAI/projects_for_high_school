@@ -10,10 +10,10 @@ from turtle import *
 from random import randrange
 from freegames import square, vector
 
-speed = 10
+s = 10
 food = vector(0, 0)
-snake = [vector(speed, 0)]
-aim = vector(0, -speed)
+snake = [vector(s, 0)]
+aim = vector(0, -s)
 times = vector(200, 0)
 delta_speed=25
 
@@ -41,7 +41,7 @@ def move():
     head.move(aim)
 
     if not inside(head) or head in snake:
-        square(head.x, head.y, speed - 1, 'red')
+        square(head.x, head.y, s - 1, 'red')
         update()
         return
 
@@ -49,18 +49,18 @@ def move():
 
     if head == food:
         print('Snake:', len(snake))
-        food.x = randrange(-15, 15) * speed
-        food.y = randrange(-15, 15) * speed
-        times.x = 200
+        food.x = randrange(-15, 15) * s
+        food.y = randrange(-15, 15) * s
+        # times.x = 200  # 注释掉这行代码， 蛇吃食物后速度不再还原
     else:
         snake.pop(0)
 
     clear()
 
     for body in snake:
-        square(body.x, body.y, speed - 1, 'black')
+        square(body.x, body.y, s - 1, 'black')
 
-    square(food.x, food.y, speed - 1, 'green')
+    square(food.x, food.y, s - 1, 'green')
     update()
     # ontimer(move,200- times.x)
     ontimer(move, times.x)
@@ -70,9 +70,9 @@ setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 listen()
-onkey(lambda: change(speed, 0), 'Right')
-onkey(lambda: change(-speed, 0), 'Left')
-onkey(lambda: change(0, speed), 'Up')
-onkey(lambda: change(0, -speed), 'Down')
+onkey(lambda: change(s, 0), 'Right')
+onkey(lambda: change(-s, 0), 'Left')
+onkey(lambda: change(0, s), 'Up')
+onkey(lambda: change(0, -s), 'Down')
 move()
 done()
