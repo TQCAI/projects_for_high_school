@@ -15,9 +15,7 @@ s = 10
 food = vector(0, 0)
 snake = [vector(s, 0)]
 aim = vector(0, -s)
-delta=190
-
-
+delta = 190
 
 
 def change(x, y):
@@ -50,7 +48,7 @@ def move():
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * s
         food.y = randrange(-15, 15) * s
-        delta*=0.95
+        delta *= 0.95
     else:
         snake.pop(0)
 
@@ -61,7 +59,7 @@ def move():
 
     square(food.x, food.y, s - 1, 'green')
     update()
-    ontimer(move, int(delta+10))
+    ontimer(move, int(delta + 10))
 
 
 setup(420, 420, 370, 0)

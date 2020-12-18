@@ -39,7 +39,7 @@ def inside(head):
 
 def get_obstacles():
     obstacles=[]
-    for i in range(5):
+    for i in range(5):  # 5 表示随机障碍物箱子的个数
         while True:
             obstacle = vector(
                 randrange(-15, 15) * s,
@@ -62,6 +62,7 @@ def move():
     head.move(aim)
 
     if not inside(head) or head in snake or head in obstacles:
+        # head in obstacles 用于判断是否撞到了障碍物
         square(head.x, head.y, s - 1, 'red')
         update()
         return
@@ -72,7 +73,7 @@ def move():
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * s
         food.y = randrange(-15, 15) * s
-        obstacles = get_obstacles()
+        obstacles = get_obstacles()  # 吃食物后，随机重排列障碍物箱子（注释掉这行取消该功能）
         # times.x = 200  # 注释掉这行代码， 蛇吃食物后速度不再还原
     else:
         snake.pop(0)
